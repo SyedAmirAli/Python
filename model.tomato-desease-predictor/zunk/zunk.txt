@@ -1,0 +1,129 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Sep  5 17:17:40 2017
+
+@author: Mohit
+"""
+
+#Part 1 : Building a CNN
+
+#import Keras packages
+""" from keras.models import Sequential
+from keras.layers import Convolution2D
+from keras.layers import MaxPooling2D
+from keras.layers import Flatten
+from keras.layers import Dense
+from keras.layers import Dropout
+import numpy as np
+from keras.utils.vis_utils import plot_model
+
+
+# Initializing the CNN
+
+np.random.seed(1337)
+classifier = Sequential()
+
+classifier.add(Convolution2D(32, 3, 3, input_shape = (128, 128, 3), activation = 'relu'))
+classifier.add(MaxPooling2D(pool_size = (2, 2)))
+classifier.add(Convolution2D(16, 3, 3, activation = 'relu'))
+classifier.add(MaxPooling2D(pool_size = (2, 2)))
+classifier.add(Convolution2D(8, 3, 3, activation = 'relu'))
+classifier.add(MaxPooling2D(pool_size = (2, 2)))
+
+
+
+classifier.add(Flatten())
+
+#hidden layer
+classifier.add(Dense(output_dim = 128, activation = 'relu'))
+classifier.add(Dropout(p = 0.5))
+
+#output layer
+classifier.add(Dense(output_dim = 10, activation = 'softmax'))
+
+classifier.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
+print(classifier.summary())
+#plot_model(classifier, show_shapes=True, to_file='PlantVillage_CNN.png') """
+
+# import Keras packages
+""" from keras.models import Sequential
+from keras.layers import Convolution2D
+from keras.layers import MaxPooling2D
+from keras.layers import Flatten
+from keras.layers import Dense
+from keras.layers import Dropout
+import numpy as np
+from keras.utils import plot_model  # Change the import statement
+
+# Initializing the CNN
+np.random.seed(1337)
+classifier = Sequential()
+
+classifier.add(Convolution2D(32, 3, 3, input_shape=(128, 128, 3), activation='relu'))
+classifier.add(MaxPooling2D(pool_size=(2, 2)))
+classifier.add(Convolution2D(16, 3, 3, activation='relu'))
+classifier.add(MaxPooling2D(pool_size=(2, 2)))
+classifier.add(Convolution2D(8, 3, 3, activation='relu'))
+classifier.add(MaxPooling2D(pool_size=(2, 2)))
+
+classifier.add(Flatten())
+
+# hidden layer
+classifier.add(Dense(units=128, activation='relu'))
+classifier.add(Dropout(rate=0.5))
+
+# output layer
+classifier.add(Dense(units=10, activation='softmax'))
+
+classifier.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+print(classifier.summary())
+
+# Plot the model
+plot_model(classifier, show_shapes=True, to_file='PlantVillage_CNN.png')
+ """
+
+import tensorflow as tf
+from tensorflow.keras.preprocessing import image
+import numpy as np
+import os
+
+# Load the trained model
+model = tf.keras.models.load_model('/home/amir/Desktop/Python/model.tomato-from-chrome/model-v2/tomato_disease.h5')
+
+# Class names
+class_names = ['Tomato___Bacterial_spot', 'Tomato___Early_blight', 'Tomato___Late_blight', 'Tomato___Leaf_Mold', 'Tomato___Septoria_leaf_spot', 'Tomato___Spider_mites',
+'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus', 'Tomato___healthy', 'Two-spotted_spider_mite']
+
+def preprocess_image(image_path):
+    # Load and preprocess the image
+    img = image.load_img(image_path, target_size=(128, 128))
+    img_array = image.img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array = img_array / 255.0  # Normalize pixel values to between 0 and 1
+    return img_array
+
+def predict_class(image_path):
+    # Preprocess the image
+    img_array = preprocess_image(image_path)
+
+    # Make predictions
+    predictions = model.predict(img_array)
+    predicted_class_index = np.argmax(predictions, axis=1)[0]
+    predicted_class = class_names[predicted_class_index]
+    return predicted_class, predictions[0][predicted_class_index]
+
+image_path = '/home/amir/Desktop/Python/model.tomato-from-chrome/train/Tomato___Target_Spot/36c496c8-403b-4f76-abea-0834dcda8d0c___Com.G_TgS_FL 8222.JPG'
+predicted_class, confidence = predict_class(image_path)
+print(f'\nPredicted Class: {predicted_class} with confidence: {confidence * 100:.2f}%\n')
+
+
+
+
+
+
+
+
+
+# image_path = '/home/amir/Desktop/Python/model.tomato-from-chrome/train/Tomato___healthy/84cbb98b-5c2f-4367-8d78-52be491e66bd___GH_HL Leaf 336.JPG'
+# image_path = '/home/amir/Desktop/Python/model.tomato-from-chrome/train/Tomato___Leaf_Mold/4ff6a1de-00e2-401b-b6c2-e523289a9228___Crnl_L.Mold 6715.JPG'
+# image_path = '/home/amir/Desktop/Python/model.tomato-from-chrome/train/Tomato___Tomato_Yellow_Leaf_Curl_Virus/d0be6c81-9b1e-43e2-a468-373cd0987885___UF.GRC_YLCV_Lab 01907.JPG'
