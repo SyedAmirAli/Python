@@ -1,0 +1,35 @@
+tomato_names = [
+  "Tomato___Bacterial_spot",
+  "Tomato___Early_blight",
+  "Tomato___Late_blight",
+  "Tomato___Leaf_Mold",
+  "Tomato___Septoria_leaf_spot",
+  "Tomato___Spider_mites",
+  "Tomato___Target_Spot",
+  "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+  "Tomato___Tomato_mosaic_virus",
+  "Tomato___healthy",
+  "Two-spotted_spider_mite",
+];
+strawberry_names = [
+  "Strawberry___Angular_Leaf_Spot",
+  "Strawberry___Anthracnose_Fruit",
+  "Strawberry___Blossom",
+  "Strawberry___Gray mold",
+  "Strawberry___Leaf_Spot",
+  "Strawberry___Leaf_scorch",
+  "Strawberry___Powdery_Mildew_Fruit",
+  "Strawberry___Powdery_Mildew_Leaf",
+  "Strawberry___healthy",
+];
+lettuce_names = [
+  "Lettuce___Bacterial",
+  "Lettuce___Fungal_Downy_mildew",
+  "Lettuce___Fungal_Septoria_Blight",
+  "Lettuce___Fungal_Wilt_and_leaf_blight",
+  "Lettuce___Fungal_powdery_mildew",
+  "Lettuce___ShepherdPurseweeds",
+  "Lettuce___Viral",
+  "Lettuce___healthy",
+  "Lettuce___infected",
+];
